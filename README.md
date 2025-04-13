@@ -84,16 +84,6 @@ A aplicação será iniciada em: `http://localhost:8080`
 
 ---
 
-## 🤝 Contribuição
-
-1. Faça um fork do projeto
-2. Crie uma branch: `git checkout -b minha-feature`
-3. Commit com mensagem semântica
-4. Push: `git push origin minha-feature`
-5. Abra um Pull Request 🚀
-
----
-
 ## 🪪 Licença
 
 Distribuído sob a licença **CC BY-NC 4.0**. Veja o arquivo [LICENSE](./LICENSE) para mais informações.
