@@ -47,7 +47,7 @@ src
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/simulador-bolsa-backend.git
+git clone https://github.com/dig-ie/simulador-bolsa-backend.git
 
 # Acesse o diretório
 cd simulador-bolsa-backend
