@@ -103,3 +103,4 @@ Distribuído sob a licença **CC BY-NC 4.0**. Veja o arquivo [LICENSE](./LICENSE
 ## 👤 Líder do projeto
 
 **Diêgo de Barros Ferreira** — *Full Stack Tech Lead*
+
