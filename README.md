@@ -84,6 +84,9 @@ A aplicação será iniciada em: `http://localhost:8080`
 
 ---
 
+🚧 Em desenvolvimento
+Este projeto ainda está em fase inicial e será evoluído continuamente, com foco em performance, usabilidade e dados em tempo real.
+
 ## 🪪 Licença
 
 Distribuído sob a licença **CC BY-NC 4.0**. Veja o arquivo [LICENSE](./LICENSE) para mais informações.
