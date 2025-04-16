@@ -4,6 +4,15 @@ Este é o backend do projeto **Simulador de Bolsa**, responsável por simular e 
 
 ---
 
+## Responsabilidades do Backend:
+📁 Backend & Banco de Dados
+Foco na persistência de dados importantes utilizando Spring Boot e PostgreSQL.</br>
+
+✅ Principais Funcionalidades:</br>
+🔐 1. Autenticação e Gerenciamento de Usuários</br>
+📊 2. Histórico de Simulações</br>
+Responsável por registrar e armazenar o histórico completo de simulações feitas pelo usuário.</br>
+
 ## 🚀 Tecnologias utilizadas
 
 - ☕ **Java 17+**
