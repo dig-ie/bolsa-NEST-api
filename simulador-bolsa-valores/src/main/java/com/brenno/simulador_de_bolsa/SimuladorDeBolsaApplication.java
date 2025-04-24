@@ -1,4 +1,4 @@
-package com.dig_ie.Simulador_de_bolsa;
+package com.brenno.simulador_de_bolsa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
