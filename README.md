@@ -34,20 +34,6 @@ Responsável por registrar e armazenar o histórico completo de simulações fei
 
 ---
 
-## 📁 Estrutura de pastas
-
-```
-src
- └── main
-     ├── java
-     │   └── com.simuladorbolsa
-     │       ├── controller     // Rotas da API
-     │       ├── service        // Regras de negócio
-     │       ├── model          // Modelos de dados
-     │       ├── repository     // Interface com banco
-     │       └── config         // Configurações gerais
-     └── resources
-         └── application.yml    // Configs do projeto
 ```
 
 ---
