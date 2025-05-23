@@ -7,9 +7,7 @@ import java.util.UUID;
 
 
 public class Transactions {
-    public enum Type {
-        BUY, SELL
-    }
+    public enum Type {BUY, SELL}
 
     private final UUID id;
     private final UUID userId;
