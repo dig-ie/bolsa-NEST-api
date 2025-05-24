@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -29,7 +30,7 @@ public class User {
     private String passwordHash;
 
     @Column(name = "balance", nullable = false, precision = 19, scale = 2)
-    private double balance;
+    private BigDecimal balance;
 
     @Column(name = "suspended_until")
     private LocalDateTime suspendedUntil;
@@ -48,7 +49,7 @@ public class User {
         this.passwordHash = Objects.requireNonNull(passwordHash, "Password hash cannot be null");
     }
 
-    public static User createForTest(double balance, LocalDateTime suspendedUntil) {
+    public static User createForTest(BigDecimal balance, LocalDateTime suspendedUntil) {
         User user = new User();
         user.setBalance(balance);
         user.setSuspendedUntil(suspendedUntil);
@@ -59,8 +60,8 @@ public class User {
         return email != null && email.matches("^[\\w.+\\-]+@[a-zA-Z0-9\\-]+(\\.[a-zA-Z0-9\\-]+)*$");
     }
 
-    public boolean hasSufficientBalance(double amount) {
-        return this.balance >= amount;
+    public boolean hasSufficientBalance(BigDecimal amount) {
+        return this.balance.compareTo(amount) >= 0;
     }
 
     public boolean isSuspended() {

@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,19 +26,19 @@ class UserDomainServiceTest {
 
     @Test
     void canInvest_ShouldReturnTrue_WhenUserHasBalanceAndIsNotSuspended() {
-        User user = User.createForTest(1000.0, null);
-        boolean result = userDomainService.canInvest(user, 500.0);
+        User user = User.createForTest(new BigDecimal("1000.00"), null);
+        boolean result = userDomainService.canInvest(user, new BigDecimal("500.00"));
         assertTrue(result);
     }
 
     @Test
     void canInvest_ShouldReturnFalse_WhenUserIsSuspended() {
         User user = User.createForTest(
-                1000.0,
+                new BigDecimal("1000.00"),
                 LocalDateTime.now().plusDays(1)
         );
 
-        boolean result = userDomainService.canInvest(user, 500.0);
+        boolean result = userDomainService.canInvest(user, new BigDecimal("500.00"));
 
         assertFalse(result);
     }
@@ -45,11 +46,35 @@ class UserDomainServiceTest {
     @Test
     void canInvest_ShouldReturnFalse_WhenInsufficientBalance() {
         User user = User.createForTest(
-                300.0,
+                new BigDecimal("300.00"),
                 null
         );
 
-        boolean result = userDomainService.canInvest(user, 500.0);
+        boolean result = userDomainService.canInvest(user, new BigDecimal("500.00"));
+
+        assertFalse(result);
+    }
+
+    @Test
+    void canInvest_ShouldReturnFalse_WhenAmountIsZero() {
+        User user = User.createForTest(
+                new BigDecimal("1000.00"),
+                null
+        );
+
+        boolean result = userDomainService.canInvest(user, BigDecimal.ZERO);
+
+        assertFalse(result);
+    }
+
+    @Test
+    void canInvest_ShouldReturnFalse_WhenAmountIsNegative() {
+        User user = User.createForTest(
+                new BigDecimal("1000.00"),
+                null
+        );
+
+        boolean result = userDomainService.canInvest(user, new BigDecimal("-500.00"));
 
         assertFalse(result);
     }

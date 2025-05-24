@@ -4,6 +4,8 @@ import com.simulador.simulador_bolsa_backend.domain.user.model.User;
 import com.simulador.simulador_bolsa_backend.domain.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 public class UserDomainService {
 
     private final UserRepository userRepository;
@@ -12,7 +14,7 @@ public class UserDomainService {
         this.userRepository = userRepository;
     }
 
-    public boolean canInvest(User user, double amount) {
+    public boolean canInvest(User user, BigDecimal amount) {
         return user.hasSufficientBalance(amount) && !user.isSuspended();
     }
 }
