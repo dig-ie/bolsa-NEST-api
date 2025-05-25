@@ -88,7 +88,7 @@ Distribuído sob a licença **CC BY-NC 4.0**. Veja o arquivo [LICENSE](./LICENSE
 
 ---
 
-## 👤 Líder do projeto
+## 👤 Desenvolvedores do projeto
 
 **Diêgo de Barros Ferreira** — *Full Stack Tech Lead* <br/>
 **Brenno Felipe** — *Backend developer* <br/>
