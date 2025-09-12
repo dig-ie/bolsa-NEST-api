@@ -1,0 +1,6 @@
+# docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build
+services:
+  api:
+    environment:
+      - NODE_ENV=production
+    command: pnpm run start:prod

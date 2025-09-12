@@ -1,0 +1,30 @@
+# docker-compose up --build -d
+version: "3.8"
+services:
+  api:
+    build: .
+    container_name: bolsa-api-nest
+    command: pnpm run start:dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - db
+  db:
+    image: postgres:16
+    container_name: bolsa-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: bolsa_sim
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

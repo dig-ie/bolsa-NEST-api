@@ -1,0 +1,6 @@
+# docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+services:
+  api:
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
