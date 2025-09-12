@@ -29,7 +29,32 @@ bolsa-api-nest/
 - Todos os módulos rodam juntos em uma única aplicação backend.
 - Banco de dados compartilhado entre os módulos.
 
-## Setup Rápido
+## Setup Docker (Desenvolvimento e Produção)
+
+### 1. Instale o Docker
+Se você nunca usou Docker, acesse https://www.docker.com/get-started/ e siga as instruções para baixar e instalar o Docker Desktop no seu sistema (Windows, Mac ou Linux). Após instalar, abra o Docker Desktop para garantir que está rodando.
+
+### 2. Como rodar o projeto
+Você não precisa instalar nada além do Docker para rodar o projeto!
+
+- **Para ambiente de desenvolvimento:**
+  ```sh
+  docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+  ```
+  Isso irá baixar as dependências, criar os containers e iniciar o sistema pronto para desenvolvimento (api, banco de dados...). 
+  Este é o ponto de entrada para o desenvolvimento. Roda a aplicação com ele e desenvolve a partir daí.
+  
+
+- **Para ambiente de produção:**
+  ```sh
+  docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build
+  ```
+  Isso irá rodar o sistema com as configurações de produção.
+
+> Dica: Para parar tudo, use `Ctrl+C` no terminal e depois `docker-compose down` para remover os containers.
+
+---
+
 
 ### Sobre arquivos `.keep`
 
