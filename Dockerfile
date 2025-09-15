@@ -1,23 +1,23 @@
-# Use Node.js LTS as base
-FROM node:20-alpine
+# Dockerfile
+FROM node:20
 
-# Set working directory
+# Diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copy package files
+# Instala pnpm global
+RUN npm install -g pnpm@latest
+
+# Copia só manifestos primeiro (cache eficiente)
 COPY package.json pnpm-lock.yaml ./
 
-# Install pnpm
-RUN npm install -g pnpm
+# Instala dependências
+RUN pnpm install --frozen-lockfile
 
-# Install dependencies
-RUN pnpm install
-
-# Copy source code
+# Copia o restante do código
 COPY . .
 
-# Expose port
-EXPOSE 3000
+# Build para prod (em dev isso é sobrescrito pelo bind-mount)
+RUN pnpm run build --silent || true
 
-# Default command (can be overridden by docker-compose)
-CMD ["pnpm", "run", "start:dev"]
+# Default: start prod
+CMD ["node", "dist/main.js"]

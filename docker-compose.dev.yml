@@ -1,6 +1,38 @@
-# docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+version: "3.8"
 services:
   api:
+    build: .
+    container_name: bolsa-api-nest-dev
+    command: pnpm run start:dev
+    working_dir: /usr/src/app
+    tty: true
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      # garante que o watcher do chokidar funcione no Windows + Docker Desktop
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=300
     volumes:
-      - ./:/usr/src/app
+      # monta seu projeto no container (reload instantâneo)
+      - ./:/usr/src/app:cached
+      # evita conflito de node_modules host ↔ container
       - /usr/src/app/node_modules
+    depends_on:
+      - db
+  db:
+    image: postgres:16
+    container_name: bolsa-db-dev
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: bolsa_sim
+    volumes:
+      - pgdata_dev:/var/lib/postgresql/data
+
+volumes:
+  pgdata_dev:
