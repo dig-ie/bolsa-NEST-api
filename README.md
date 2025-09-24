@@ -34,7 +34,7 @@ bolsa-api-nest/
 ### 1. Instale o Docker
 Se você nunca usou Docker, acesse https://www.docker.com/get-started/ e siga as instruções para baixar e instalar o Docker Desktop no seu sistema (Windows, Mac ou Linux). Após instalar, abra o Docker Desktop para garantir que está rodando.
 
-### 2. Como rodar o projeto
+### 2. Como rodar o projeto 
 Você não precisa instalar nada além do Docker para rodar o projeto!
 
 - **Para ambiente de desenvolvimento:**
