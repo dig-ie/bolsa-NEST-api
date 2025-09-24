@@ -16,6 +16,8 @@ RUN pnpm install --frozen-lockfile
 # Copia o restante do código
 COPY . .
 
+RUN npx prisma generate
+
 # Build para prod (em dev isso é sobrescrito pelo bind-mount)
 RUN pnpm run build --silent || true
 
