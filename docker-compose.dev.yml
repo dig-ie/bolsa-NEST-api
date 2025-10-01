@@ -3,7 +3,7 @@ services:
   api:
     build: .
     container_name: bolsa-api-nest-dev
-    command: pnpm run start:dev
+    command: sh -c "npx prisma generate && npx prisma migrate deploy && npx prisma db seed && pnpm run start:dev"
     working_dir: /usr/src/app
     tty: true
     stdin_open: true
@@ -11,6 +11,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=development
+      - DATABASE_URL=postgresql://user:bolsa2024!@db:5432/bolsa_sim?schema=public
       # garante que o watcher do chokidar funcione no Windows + Docker Desktop
       - CHOKIDAR_USEPOLLING=true
       - CHOKIDAR_INTERVAL=300
@@ -20,19 +21,44 @@ services:
       # evita conflito de node_modules host ↔ container
       - /usr/src/app/node_modules
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    restart: unless-stopped
   db:
-    image: postgres:16
+    image: postgres:15
     container_name: bolsa-db-dev
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
+      POSTGRES_PASSWORD: bolsa2024!
       POSTGRES_DB: bolsa_sim
     volumes:
       - pgdata_dev:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d bolsa_sim"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  prisma-studio:
+    build: .
+    container_name: bolsa-prisma-studio-dev
+    command: npx prisma studio --hostname 0.0.0.0
+    working_dir: /usr/src/app
+    ports:
+      - "5555:5555"
+    environment:
+      - DATABASE_URL=postgresql://user:bolsa2024!@db:5432/bolsa_sim?schema=public
+    volumes:
+      - ./:/usr/src/app:cached
+      - /usr/src/app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
 
 volumes:
   pgdata_dev:

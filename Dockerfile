@@ -16,6 +16,7 @@ RUN pnpm install --frozen-lockfile
 # Copia o restante do código
 COPY . .
 
+# Gera o cliente Prisma
 RUN npx prisma generate
 
 # Build para prod (em dev isso é sobrescrito pelo bind-mount)
