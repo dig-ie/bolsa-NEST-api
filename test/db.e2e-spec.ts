@@ -6,9 +6,9 @@ describe("Database basic test", () => {
   beforeAll(async () => {
     client = new Client({
       host: process.env.DB_HOST || "localhost",
-      port: +(process.env.DB_PORT || 5432),
+      port: +(process.env.DB_PORT || 5433),
       user: process.env.DB_USER || "user",
-      password: process.env.DB_PASS || "pass",
+      password: process.env.DB_PASS || "bolsa2024!",
       database: process.env.DB_NAME || "bolsa_sim",
     });
     await client.connect();
