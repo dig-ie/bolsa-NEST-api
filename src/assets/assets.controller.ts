@@ -17,11 +17,11 @@ import {
   ApiParam,
   ApiBody
 } from '@nestjs/swagger';
+import { Assets } from '@prisma/client';
 import { AssetsService } from './assets.service';
 import { CreateAssetDto } from './dto/create-asset.dto';
 import { UpdateAssetDto } from './dto/update-asset.dto';
 import { AssetResponseDto } from './dto/asset-response.dto';
-import { Asset } from './assets.service';
 
 @ApiTags('Assets')
 @Controller('assets')
@@ -37,7 +37,7 @@ export class AssetsController {
     description: 'Asset criado com sucesso',
     type: AssetResponseDto
   })
-  async create(@Body() createAssetDto: CreateAssetDto): Promise<Asset> {
+  async create(@Body() createAssetDto: CreateAssetDto): Promise<Assets> {
     return await this.assetsService.create(createAssetDto);
   }
 
@@ -48,7 +48,7 @@ export class AssetsController {
     description: 'Lista de assets',
     type: [AssetResponseDto]
   })
-  async findAll(): Promise<Asset[]> {
+  async findAll(): Promise<Assets[]> {
     return await this.assetsService.findAll();
   }
 
@@ -60,7 +60,7 @@ export class AssetsController {
     description: 'Asset encontrado',
     type: AssetResponseDto
   })
-  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Asset> {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Assets> {
     return await this.assetsService.findOne(id);
   }
 
@@ -76,7 +76,7 @@ export class AssetsController {
   async update(
     @Param('id', ParseIntPipe) id: number, 
     @Body() updateAssetDto: UpdateAssetDto
-  ): Promise<Asset> {
+  ): Promise<Assets> {
     return await this.assetsService.update(id, updateAssetDto);
   }
 

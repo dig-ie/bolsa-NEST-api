@@ -9,27 +9,20 @@ async function bootstrap() {
   
   const app = await NestFactory.create(AppModule);
   
-  // Configurar filtro global de exceções
+ 
   app.useGlobalFilters(new HttpExceptionFilter());
   
-  // Configurar validação global
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,
-    whitelist: true,
-    forbidNonWhitelisted: true,
-    transformOptions: {
-      enableImplicitConversion: true,
-    },
-  }));
+
   
-  // Configurar CORS
+  
+
   app.enableCors({
     origin: process.env.CORS_ORIGIN || '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
   
-  // Configurar Swagger
+
   const config = new DocumentBuilder()
     .setTitle('Bolsa API')
     .setDescription('API para sistema de bolsa de valores')
