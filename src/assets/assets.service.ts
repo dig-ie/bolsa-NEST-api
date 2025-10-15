@@ -78,11 +78,11 @@ export class AssetsService {
   async update(id: number, updateAssetDto: UpdateAssetDto) {
     try {
       if (!this.isValidId(id)) {
-        throw new BadRequestException('ID deve ser um número positivo');
+        throw new BadRequestException('ID must be a positive number');
       }
       
       if (Object.keys(updateAssetDto).length === 0) {
-        throw new BadRequestException('Pelo menos um campo deve ser fornecido para atualização');
+        throw new BadRequestException('At least one field must be provided for update');
       }
 
      
@@ -118,14 +118,14 @@ export class AssetsService {
           error instanceof BadRequestException) {
         throw error;
       }
-      throw new AssetServiceException('Falha ao atualizar asset', error);
+      throw new AssetServiceException('Failed to update asset', error);
     }
   }
 
   async remove(id: number) {
     try {
       if (!this.isValidId(id)) {
-        throw new BadRequestException('ID deve ser um número positivo');
+        throw new BadRequestException('ID must be a positive number');
       }
 
     
@@ -139,7 +139,7 @@ export class AssetsService {
       if (error instanceof AssetNotFoundException || error instanceof BadRequestException) {
         throw error;
       }
-      throw new AssetServiceException('Falha ao remover asset', error);
+      throw new AssetServiceException('Failed to remove asset', error);
     }
   }
 

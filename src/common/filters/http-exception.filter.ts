@@ -28,7 +28,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         : exceptionResponse;
     } else {
       status = HttpStatus.INTERNAL_SERVER_ERROR;
-      message = 'Erro interno do servidor';
+      message = 'Internal server error';
     }
 
     const errorResponse = {

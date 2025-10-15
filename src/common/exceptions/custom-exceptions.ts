@@ -5,7 +5,7 @@ export class AssetNotFoundException extends HttpException {
     super(
       {
         statusCode: HttpStatus.NOT_FOUND,
-        message: `Asset com ID ${id} não encontrado`,
+        message: `Asset with ID ${id} not found`,
         error: 'Asset Not Found',
         timestamp: new Date().toISOString(),
       },
@@ -19,7 +19,7 @@ export class AssetAlreadyExistsException extends HttpException {
     super(
       {
         statusCode: HttpStatus.CONFLICT,
-        message: `Asset com símbolo ${symbol} já existe`,
+        message: `Asset with symbol ${symbol} already exists`,
         error: 'Asset Already Exists',
         timestamp: new Date().toISOString(),
       },
@@ -47,7 +47,7 @@ export class AssetServiceException extends HttpException {
     super(
       {
         statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-        message: `Erro interno do serviço de assets: ${message}`,
+        message: `Internal asset service error: ${message}`,
         error: 'Asset Service Error',
         timestamp: new Date().toISOString(),
         cause: cause?.message || cause,

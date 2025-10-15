@@ -30,11 +30,11 @@ export class AssetsController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({ summary: 'Criar um novo asset' })
+  @ApiOperation({ summary: 'Create a new asset' })
   @ApiBody({ type: CreateAssetDto })
   @ApiResponse({ 
     status: 201, 
-    description: 'Asset criado com sucesso',
+    description: 'Asset created successfully',
     type: AssetResponseDto
   })
   async create(@Body() createAssetDto: CreateAssetDto): Promise<Assets> {
@@ -42,10 +42,10 @@ export class AssetsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Listar todos os assets' })
+  @ApiOperation({ summary: 'List all assets' })
   @ApiResponse({ 
     status: 200, 
-    description: 'Lista de assets',
+    description: 'List of assets',
     type: [AssetResponseDto]
   })
   async findAll(): Promise<Assets[]> {
@@ -53,11 +53,11 @@ export class AssetsController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Buscar asset por ID' })
+  @ApiOperation({ summary: 'Get asset by ID' })
   @ApiParam({ name: 'id', type: 'number', example: 1 })
   @ApiResponse({ 
     status: 200, 
-    description: 'Asset encontrado',
+    description: 'Asset found',
     type: AssetResponseDto
   })
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Assets> {
@@ -65,12 +65,12 @@ export class AssetsController {
   }
 
   @Put(':id')
-  @ApiOperation({ summary: 'Atualizar asset' })
+  @ApiOperation({ summary: 'Update asset' })
   @ApiParam({ name: 'id', type: 'number', example: 1 })
   @ApiBody({ type: UpdateAssetDto })
   @ApiResponse({ 
     status: 200, 
-    description: 'Asset atualizado',
+    description: 'Asset updated',
     type: AssetResponseDto
   })
   async update(
@@ -82,9 +82,9 @@ export class AssetsController {
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiOperation({ summary: 'Remover asset' })
+  @ApiOperation({ summary: 'Remove asset' })
   @ApiParam({ name: 'id', type: 'number', example: 1 })
-  @ApiResponse({ status: 204, description: 'Asset removido' })
+  @ApiResponse({ status: 204, description: 'Asset removed' })
   async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     await this.assetsService.remove(id);
   }

@@ -3,26 +3,26 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateAssetDto {
   @ApiPropertyOptional({
-    description: 'Nome do ativo',
+    description: 'Asset name',
     example: 'Petróleo Brasileiro S.A.',
     minLength: 2,
     maxLength: 100,
   })
   @IsOptional()
-  @IsString({ message: 'O nome deve ser uma string' })
-  @Length(2, 100, { message: 'O nome deve ter entre 2 e 100 caracteres' })
+  @IsString({ message: 'Name must be a string' })
+  @Length(2, 100, { message: 'Name must be between 2 and 100 characters' })
   name?: string;
 
   @ApiPropertyOptional({
-    description: 'Símbolo do ativo (ticker)',
+    description: 'Asset symbol (ticker)',
     example: 'PETR4',
     pattern: '^[A-Z0-9]{2,10}$',
   })
   @IsOptional()
-  @IsString({ message: 'O símbolo deve ser uma string' })
-  @Length(2, 10, { message: 'O símbolo deve ter entre 2 e 10 caracteres' })
+  @IsString({ message: 'Symbol must be a string' })
+  @Length(2, 10, { message: 'Symbol must be between 2 and 10 characters' })
   @Matches(/^[A-Z0-9]+$/, { 
-    message: 'O símbolo deve conter apenas letras maiúsculas e números' 
+    message: 'Symbol must contain only uppercase letters and numbers' 
   })
   symbol?: string;
 }
