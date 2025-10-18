@@ -30,7 +30,8 @@ describe('Assets - All Routes (e2e)', () => {
     it('should create a new asset', async () => {
       const newAsset = {
         name: 'Petrobras',
-        symbol: 'PETR4'
+        symbol: 'PETR4',
+        price: 25.50
       };
 
       const response = await request(app.getHttpServer())
@@ -42,6 +43,7 @@ describe('Assets - All Routes (e2e)', () => {
 
       expect(response.body.name).toBe('Petrobras');
       expect(response.body.symbol).toBe('PETR4');
+      expect(response.body.price).toBe(25.5);
       expect(response.body.isActive).toBe(true);
       expect(response.body).toHaveProperty('id');
       expect(response.body).toHaveProperty('createdAt');
@@ -52,14 +54,16 @@ describe('Assets - All Routes (e2e)', () => {
         .post('/assets')
         .send({
           name: 'Petrobras',
-          symbol: 'PETR4'
+          symbol: 'PETR4',
+          price: 25.50
         });
 
       await request(app.getHttpServer())
         .post('/assets')
         .send({
           name: 'Another Company',
-          symbol: 'PETR4'
+          symbol: 'PETR4',
+          price: 30.00
         })
         .expect(409);
     });
@@ -77,11 +81,11 @@ describe('Assets - All Routes (e2e)', () => {
     it('should return created assets', async () => {
       await request(app.getHttpServer())
         .post('/assets')
-        .send({ name: 'Petrobras', symbol: 'PETR4' });
+        .send({ name: 'Petrobras', symbol: 'PETR4', price: 25.50 });
 
       await request(app.getHttpServer())
         .post('/assets')
-        .send({ name: 'Vale', symbol: 'VALE3' });
+        .send({ name: 'Vale', symbol: 'VALE3', price: 45.75 });
 
       const response = await request(app.getHttpServer())
         .get('/assets')
@@ -91,6 +95,7 @@ describe('Assets - All Routes (e2e)', () => {
       expect(response.body[0]).toHaveProperty('id');
       expect(response.body[0]).toHaveProperty('name');
       expect(response.body[0]).toHaveProperty('symbol');
+      expect(response.body[0]).toHaveProperty('price');
     });
   });
 
@@ -98,7 +103,7 @@ describe('Assets - All Routes (e2e)', () => {
     beforeEach(async () => {
       const response = await request(app.getHttpServer())
         .post('/assets')
-        .send({ name: 'Petrobras', symbol: 'PETR4' });
+        .send({ name: 'Petrobras', symbol: 'PETR4', price: 25.50 });
       
       assetId = response.body.id;
     });
@@ -111,6 +116,7 @@ describe('Assets - All Routes (e2e)', () => {
       expect(response.body.id).toBe(assetId);
       expect(response.body.name).toBe('Petrobras');
       expect(response.body.symbol).toBe('PETR4');
+      expect(response.body.price).toBe(25.5);
     });
 
     it('should return 404 for non-existent ID', async () => {
@@ -130,7 +136,7 @@ describe('Assets - All Routes (e2e)', () => {
     beforeEach(async () => {
       const response = await request(app.getHttpServer())
         .post('/assets')
-        .send({ name: 'Petrobras', symbol: 'PETR4' });
+        .send({ name: 'Petrobras', symbol: 'PETR4', price: 25.50 });
       
       assetId = response.body.id;
     });
@@ -138,7 +144,8 @@ describe('Assets - All Routes (e2e)', () => {
     it('should update asset completely', async () => {
       const updateData = {
         name: 'Updated Petrobras',
-        symbol: 'PETR5'
+        symbol: 'PETR5',
+        price: 30.75
       };
 
       const response = await request(app.getHttpServer())
@@ -149,6 +156,7 @@ describe('Assets - All Routes (e2e)', () => {
       expect(response.body.id).toBe(assetId);
       expect(response.body.name).toBe('Updated Petrobras');
       expect(response.body.symbol).toBe('PETR5');
+      expect(response.body.price).toBe(30.75);
     });
 
     it('should update only the name', async () => {
@@ -159,6 +167,7 @@ describe('Assets - All Routes (e2e)', () => {
 
       expect(response.body.name).toBe('New Name');
       expect(response.body.symbol).toBe('PETR4');
+      expect(response.body.price).toBe(25.5);
     });
 
     it('should return 404 for non-existent ID', async () => {
@@ -173,7 +182,7 @@ describe('Assets - All Routes (e2e)', () => {
     beforeEach(async () => {
       const response = await request(app.getHttpServer())
         .post('/assets')
-        .send({ name: 'Petrobras', symbol: 'PETR4' });
+        .send({ name: 'Petrobras', symbol: 'PETR4', price: 25.50 });
       
       assetId = response.body.id;
     });
