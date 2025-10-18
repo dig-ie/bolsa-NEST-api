@@ -7,7 +7,7 @@ import {
   AssetAlreadyExistsException, 
   InvalidAssetDataException,
   AssetServiceException
-} from '../common/exceptions/custom-exceptions';
+} from './exceptions/custom-exceptions';
 
 @Injectable()
 export class AssetsService {
@@ -32,7 +32,10 @@ export class AssetsService {
         }
       });
 
-      return asset;
+      return {
+        ...asset,
+        price: parseFloat((asset as any).price.toString())
+      };
     } catch (error) {
       if (error instanceof AssetAlreadyExistsException) {
         throw error;
@@ -43,10 +46,15 @@ export class AssetsService {
 
   async findAll() {
     try {
-      return await this.prisma.assets.findMany({
+      const assets = await this.prisma.assets.findMany({
         where: { isActive: true },
         orderBy: { createdAt: 'desc' }
       });
+      
+      return assets.map(asset => ({
+        ...asset,
+        price: parseFloat((asset as any).price.toString())
+      }));
     } catch (error) {
       throw new AssetServiceException('Failed to fetch assets', error);
     }
@@ -66,7 +74,10 @@ export class AssetsService {
         throw new AssetNotFoundException(id);
       }
 
-      return asset;
+      return {
+        ...asset,
+        price: parseFloat((asset as any).price.toString())
+      };
     } catch (error) {
       if (error instanceof AssetNotFoundException || error instanceof BadRequestException) {
         throw error;
@@ -111,7 +122,10 @@ export class AssetsService {
         }
       });
 
-      return asset;
+      return {
+        ...asset,
+        price: parseFloat((asset as any).price.toString())
+      };
     } catch (error) {
       if (error instanceof AssetNotFoundException || 
           error instanceof AssetAlreadyExistsException ||

@@ -1,4 +1,4 @@
-import { IsString, IsOptional, Length, Matches } from 'class-validator';
+import { IsString, IsOptional, Length, Matches, IsNumber, IsPositive } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateAssetDto {
@@ -25,4 +25,14 @@ export class UpdateAssetDto {
     message: 'Symbol must contain only uppercase letters and numbers' 
   })
   symbol?: string;
+
+  @ApiPropertyOptional({
+    description: 'Asset price',
+    example: 25.50,
+    minimum: 0.01,
+  })
+  @IsOptional()
+  @IsNumber({}, { message: 'Price must be a number' })
+  @IsPositive({ message: 'Price must be a positive number' })
+  price?: number;
 }

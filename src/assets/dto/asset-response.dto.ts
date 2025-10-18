@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 
 export class AssetResponseDto {
   @ApiProperty({
@@ -18,6 +19,19 @@ export class AssetResponseDto {
     example: 'PETR4',
   })
   symbol: string;
+
+  @ApiProperty({
+    description: 'Asset price',
+    example: 25.50,
+  })
+  @Transform(({ value }) => parseFloat(value.toString()))
+  price: number;
+
+  @ApiProperty({
+    description: 'Whether the asset is active',
+    example: true,
+  })
+  isActive: boolean;
 
   @ApiProperty({
     description: 'Asset creation date',
