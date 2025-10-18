@@ -24,11 +24,11 @@ model User {
 }
 
 model Assets {
-  id          Int      @id @default(autoincrement())
-  name        String
-  symbol      String   @unique
-  description String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  name      String
+  symbol    String   @unique
+  price     Decimal  @db.Decimal(10, 2)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
